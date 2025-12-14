@@ -5,9 +5,5 @@ class IsAdmin(permissions.BasePermission):
         return bool(
             request.user 
             and request.user.is_authenticated 
-            and request.user.is_admin
+            and request.user.is_staff   # 🔥 correct field
         )
-    def get_permissions(self):
-        if self.action in ["destroy", "restock", "destock"]:
-            return [IsAdmin()]  # Admin only actions
-        return [permissions.IsAuthenticated()]
